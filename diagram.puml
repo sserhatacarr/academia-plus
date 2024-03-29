@@ -1,0 +1,40 @@
+@startuml
+class Student {
+    +id: Long
+    +firstName: String
+    +lastName: String
+    +studentNumber: String
+    +classInfo: String
+    +registerCourse(course: Course): void
+    +getGrades(): Grade[]
+}
+
+class Teacher {
+    +id: Long
+    +firstName: String
+    +lastName: String
+    +createCourse(course: Course): void
+    +assignCourseToStudent(course: Course, student: Student): void
+    +gradeStudent(student: Student, grade: Grade): void
+}
+
+class Course {
+    +id: Long
+    +name: String
+    +description: String
+    +teacher: Teacher
+    +students: Student[]
+}
+
+class Grade {
+    +id: Long
+    +value: Double
+    +course: Course
+    +student: Student
+}
+
+Student "1" *-- "many" Course : attends
+Teacher "1" *-- "many" Course : teaches
+Course "1" *-- "many" Grade : has
+Student "1" *-- "many" Grade : receives
+@enduml
