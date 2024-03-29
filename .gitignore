@@ -45,3 +45,7 @@ buildNumber.properties
 
 # Mac
 .DS_Store
+HELP.md
+mvnw.cmd
+.mvn/wrapper/maven-wrapper.properties
+mvnw
