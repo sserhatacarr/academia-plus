@@ -33,15 +33,6 @@ public class AcademiaPlusApplication {
 			Faker faker = new Faker();
 
 			for (int i = 0; i < 10; i++) {
-				Student student = new Student();
-				student.setClassInfo(faker.educator().campus());
-				student.setFirstName(faker.name().firstName());
-				student.setLastName(faker.name().lastName());
-				student.setStudentNumber(faker.numerify("##########"));
-				studentRepo.save(student);
-			}
-
-			for (int i = 0; i < 10; i++) {
 				Teacher teacher = new Teacher();
 				teacher.setFirstName(faker.name().firstName());
 				teacher.setLastName(faker.name().lastName());
@@ -53,7 +44,18 @@ public class AcademiaPlusApplication {
 				course.setCourseName(faker.educator().course());
 				course.setDescription(faker.lorem().sentence());
 				course.setTeacher(teacherRepo.findById((long) faker.number().numberBetween(1, 10)).get());
+				course.setStudents(new HashSet<>());
 				courseRepo.save(course);
+			}
+
+			for (int i = 0; i < 10; i++) {
+				Student student = new Student();
+				student.setClassInfo(faker.educator().campus());
+				student.setFirstName(faker.name().firstName());
+				student.setLastName(faker.name().lastName());
+				student.setStudentNumber(faker.numerify("##########"));
+				student.setCourses(new HashSet<>());
+				studentRepo.save(student);
 			}
 
 			for (int i = 0; i < 10; i++) {
@@ -77,7 +79,7 @@ public class AcademiaPlusApplication {
 
 			// for (Student student : students) {
 			// for (Course course : courses) {
-			// student.addCourse(course);
+			// student.getCourses().add(course);
 			// studentRepo.save(student);
 			// }
 			// }

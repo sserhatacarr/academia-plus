@@ -2,7 +2,11 @@ package dev.serhatacar.academiaplus.entity;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,15 +32,13 @@ public class Course {
     private Long id;
     private String courseName;
     private String description;
+
     @ManyToOne
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private Teacher teacher;
-    @ManyToMany
-    @JoinTable(name = "student_course", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
+
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+    @JsonBackReference
     private Set<Student> students;
 
-    public void addStudent(Student student) {
-        this.students.add(student);
-        student.getCourses().add(this);
-    }
 }
