@@ -45,7 +45,10 @@ buildNumber.properties
 
 # Mac
 .DS_Store
+
+#Custom
 HELP.md
 mvnw.cmd
 .mvn/wrapper/maven-wrapper.properties
 mvnw
+.vscode/
