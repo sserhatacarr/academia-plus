@@ -34,4 +34,9 @@ public class Course {
     @ManyToMany
     @JoinTable(name = "student_course", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
     private Set<Student> students;
+
+    public void addStudent(Student student) {
+        this.students.add(student);
+        student.getCourses().add(this);
+    }
 }
