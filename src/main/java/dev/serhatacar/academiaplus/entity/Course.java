@@ -37,7 +37,7 @@ public class Course {
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private Teacher teacher;
 
-    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "courses")
     @JsonBackReference
     private Set<Student> students;
 

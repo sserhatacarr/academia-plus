@@ -34,6 +34,7 @@ public class Student {
     private String lastName;
     private String studentNumber;
     private String classInfo;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "student_course",
 
@@ -42,6 +43,6 @@ public class Student {
             }, inverseJoinColumns = {
                     @JoinColumn(name = "course_id", referencedColumnName = "id")
             })
-    @JsonManagedReference
+
     private Set<Course> courses;
 }

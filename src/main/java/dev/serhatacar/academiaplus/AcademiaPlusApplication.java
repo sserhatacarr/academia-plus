@@ -26,7 +26,7 @@ public class AcademiaPlusApplication {
 		SpringApplication.run(AcademiaPlusApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner demoData(StudentRepository studentRepo, CourseRepository courseRepo,
 			GradeRepository gradeRepo, TeacherRepository teacherRepo) {
 		return args -> {
@@ -38,13 +38,11 @@ public class AcademiaPlusApplication {
 				teacher.setLastName(faker.name().lastName());
 				teacherRepo.save(teacher);
 			}
-
 			for (int i = 0; i < 10; i++) {
 				Course course = new Course();
 				course.setCourseName(faker.educator().course());
 				course.setDescription(faker.lorem().sentence());
 				course.setTeacher(teacherRepo.findById((long) faker.number().numberBetween(1, 10)).get());
-				course.setStudents(new HashSet<>());
 				courseRepo.save(course);
 			}
 
@@ -54,7 +52,6 @@ public class AcademiaPlusApplication {
 				student.setFirstName(faker.name().firstName());
 				student.setLastName(faker.name().lastName());
 				student.setStudentNumber(faker.numerify("##########"));
-				student.setCourses(new HashSet<>());
 				studentRepo.save(student);
 			}
 
@@ -85,6 +82,6 @@ public class AcademiaPlusApplication {
 			// }
 
 		};
-	}
+	}*/
 
 }

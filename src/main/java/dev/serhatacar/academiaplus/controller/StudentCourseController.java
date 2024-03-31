@@ -61,4 +61,9 @@ public class StudentCourseController {
         return courseRepo.save(course);
     }
 
+    @PostMapping
+    public Student saveStudentWithCourses(@RequestBody Student student) {
+        return studentRepo.save(student);
+    }
+
 }
