@@ -21,9 +21,10 @@ public class TeacherService {
 
     private final TeacherRepository teacherRepository;
 
-    public TeacherResponse saveTeacher(TeacherRequest teacherRequest) {
-        Teacher teacher = teacherRepository.save(TeacherMapper.toTeacher(teacherRequest));
-        return TeacherMapper.toTeacherResponse(teacher);
+    public List<TeacherResponse> getAllTeachers() {
+        return teacherRepository.findAll().stream()
+                .map(TeacherMapper::toTeacherResponse)
+                .collect(Collectors.toList());
     }
 
     public TeacherResponse getTeacherById(Long id) {
@@ -32,10 +33,9 @@ public class TeacherService {
                 .orElseThrow(() -> new RuntimeException("Teacher not found."));
     }
 
-    public List<TeacherResponse> getAllTeachers() {
-        return teacherRepository.findAll().stream()
-                .map(TeacherMapper::toTeacherResponse)
-                .collect(Collectors.toList());
+    public TeacherResponse saveTeacher(TeacherRequest teacherRequest) {
+        Teacher teacher = teacherRepository.save(TeacherMapper.toTeacher(teacherRequest));
+        return TeacherMapper.toTeacherResponse(teacher);
     }
 
     public TeacherResponse updateTeacherById(Long id, TeacherRequest teacherRequest) {

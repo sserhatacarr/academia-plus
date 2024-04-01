@@ -5,8 +5,8 @@ package dev.serhatacar.academiaplus.dto;
  */
 
 public record TeacherResponse(
-                            Long id,
-                            String firstName,
-                            String lastName
+        Long id,
+        String firstName,
+        String lastName
 ) {
 }

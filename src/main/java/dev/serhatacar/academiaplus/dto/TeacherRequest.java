@@ -5,7 +5,7 @@ package dev.serhatacar.academiaplus.dto;
  */
 
 public record TeacherRequest(
-                            String firstName,
-                            String lastName
+        String firstName,
+        String lastName
 ) {
 }
