@@ -35,7 +35,7 @@ public class Student {
     private String studentNumber;
     private String classInfo;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "student_course",
 
             joinColumns = {
@@ -43,6 +43,5 @@ public class Student {
             }, inverseJoinColumns = {
                     @JoinColumn(name = "course_id", referencedColumnName = "id")
             })
-
     private Set<Course> courses;
 }

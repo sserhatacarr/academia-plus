@@ -44,8 +44,10 @@ public class StudentService {
     public StudentResponse updateStudent(Long id, StudentRequest studentRequest) {
         Student student = studentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
-        StudentMapper.toStudent(studentRequest);
-        student.setId(id);
+        student.setFirstName(studentRequest.firstName());
+        student.setLastName(studentRequest.lastName());
+        student.setStudentNumber(studentRequest.studentNumber());
+        student.setClassInfo(studentRequest.classInfo());
         return getStudentResponse(studentRequest, student, courseRepository, studentRepository);
     }
 
@@ -60,6 +62,10 @@ public class StudentService {
         }
         Student studentWithCourse = studentRepository.save(student);
         return StudentMapper.toStudentResponse(studentWithCourse);
+    }
+
+    public void deleteStudent(Long id) {
+        studentRepository.deleteById(id);
     }
 }
 
