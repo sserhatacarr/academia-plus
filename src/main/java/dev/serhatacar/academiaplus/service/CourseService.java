@@ -10,6 +10,8 @@ import dev.serhatacar.academiaplus.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author Serhat Acar
  */
@@ -28,5 +30,31 @@ public class CourseService {
 
 
         return CourseMapper.toCourseResponse(course);
+    }
+
+    public CourseResponse getCourseById(Long id) {
+        return courseRepository.findById((id))
+                .map(CourseMapper::toCourseResponse)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+    }
+
+    public List<CourseResponse> getAllCourses() {
+        return courseRepository.findAll().stream()
+                .map(CourseMapper::toCourseResponse)
+                .toList();
+    }
+
+    public CourseResponse updateCourse(Long id, CourseRequest courseRequest) {
+        Course course = courseRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+        course.setCourseName(courseRequest.courseName());
+        course.setDescription(courseRequest.description());
+        course.setTeacher(teacherRepository.findById(courseRequest.teacherId()).orElseThrow());
+        courseRepository.save(course);
+        return CourseMapper.toCourseResponse(course);
+    }
+
+    public void deleteCourse(Long id) {
+        courseRepository.deleteById(id);
     }
 }

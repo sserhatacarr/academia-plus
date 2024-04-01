@@ -4,10 +4,9 @@ import dev.serhatacar.academiaplus.dto.CourseRequest;
 import dev.serhatacar.academiaplus.dto.CourseResponse;
 import dev.serhatacar.academiaplus.service.CourseService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author Serhat Acar
@@ -22,5 +21,25 @@ public class CourseController {
     @PostMapping
     public CourseResponse saveCourse (@RequestBody CourseRequest courseRequest) {
         return courseService.saveCourse(courseRequest);
+    }
+
+    @GetMapping("/{id}")
+    public CourseResponse getCourseById(@PathVariable Long id) {
+        return courseService.getCourseById(id);
+    }
+
+    @GetMapping
+    public List<CourseResponse> getAllCourses() {
+        return courseService.getAllCourses();
+    }
+
+    @PutMapping("/{id}")
+    public CourseResponse updateCourse(@PathVariable Long id, @RequestBody CourseRequest courseRequest) {
+        return courseService.updateCourse(id, courseRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCourse(@PathVariable Long id) {
+        courseService.deleteCourse(id);
     }
 }
