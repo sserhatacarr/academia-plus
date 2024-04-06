@@ -10,10 +10,16 @@ import dev.serhatacar.academiaplus.entity.Teacher;
 
 public class TeacherMapper {
     public static TeacherResponse toTeacherResponse(Teacher teacher) {
-        return new TeacherResponse(teacher.getId(), teacher.getFirstName(), teacher.getLastName());
+        return new TeacherResponse(
+                teacher.getId(),
+                teacher.getFirstName(),
+                teacher.getLastName());
     }
 
     public static Teacher toTeacher(TeacherRequest teacherRequest) {
-        return new Teacher(null, teacherRequest.firstName(), teacherRequest.lastName());
+        return new Teacher(
+                null,
+                teacherRequest.firstName(),
+                teacherRequest.lastName());
     }
 }
