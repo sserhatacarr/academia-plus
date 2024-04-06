@@ -18,12 +18,12 @@ public class GradeController {
     private final GradeService gradeService;
 
     @PostMapping
-    public GradeResponse saveGrade(GradeRequest gradeRequest) {
+    public GradeResponse saveGrade(@RequestBody GradeRequest gradeRequest) {
         return gradeService.saveGrade(gradeRequest);
     }
 
     @GetMapping("/{id}")
-    public GradeResponse getGradeById(Long id) {
+    public GradeResponse getGradeById(@PathVariable Long id) {
         return gradeService.getGradeById(id);
     }
 
@@ -33,13 +33,13 @@ public class GradeController {
     }
 
     @PutMapping("/{id}")
-    public GradeResponse updateGrade(Long id, GradeRequest gradeRequest) {
-        return gradeService.updateGrade(id, gradeRequest);
+    public GradeResponse updateGrade(@PathVariable Long id, @RequestBody GradeRequest gradeRequest) {
+        return gradeService.updateGradeById(id, gradeRequest);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteGrade(Long id) {
-        gradeService.deleteGrade(id);
+    public void deleteGrade(@PathVariable Long id) {
+        gradeService.deleteGradeById(id);
     }
 
 }
